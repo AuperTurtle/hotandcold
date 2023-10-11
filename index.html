@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<script>
+let playerGuess = 50;
+let guessesLeft = 5;
+let computerLying = false;
+
+function generateNum() {
+randomNum = Math.floor(Math.random() * 100) + 1
+updateValue();
+}
+
+function updateValue() {
+guess = document.getElementById("currentGuess");
+guess.innerHTML = "Current Guess: " + playerGuess;
+guess.style.fontWeight = "bold";
+guessCounter = document.getElementById("guessCounter");
+guessCounter.innerHTML = "Guesses Left: " + guessesLeft;
+guessCounter.style.fontWeight = "bold";
+}
+
+function modifyGuess(a) {
+if ((playerGuess + a >= 0) && (playerGuess + a <= 100) && (guessesLeft > 0)) {
+playerGuess += a
+guess = document.getElementById("currentGuess");
+guess.innerHTML = "Current Guess: " + playerGuess;
+guess.style.fontWeight = "bold";
+}
+guessCounter = document.getElementById("guessCounter");
+guessCounter.innerHTML =  "Guesses Left: " + guessesLeft;
+guessCounter.style.fontWeight = "bold";
+}
+
+function commitGuess() {
+    guessLogs = document.getElementById("guessLog");
+
+        tempNum = Math.floor(Math.random() * 100) + 1;
+        if (tempNum <= 5) {
+            computerLying = true;
+        }
+
+        if (computerLying) {
+            tempNum2 = Math.floor(Math.random() * 8) + 1;
+            if (tempNum2 = 1) {
+                guessLogs.innerHTML = "Very Hot";
+                guessesLeft--;
+            }
+            if (tempNum2 = 2) {
+                guessLogs.innerHTML = "Hot";
+                guessesLeft--;
+            }
+            if (tempNum2 = 3) {
+                guessLogs.innerHTML = "Very Warm";
+                guessesLeft--;
+            }
+            if (tempNum2 = 4) {
+                guessLogs.innerHTML = "Warm";
+                guessesLeft--;
+            }
+            if (tempNum2 = 5) {
+                guessLogs.innerHTML = "Cool";
+                guessesLeft--;
+            }
+            if (tempNum2 = 6) {
+                guessLogs.innerHTML = "Very Cool";
+                guessesLeft--;
+            }
+            if (tempNum2 = 7) {
+                guessLogs.innerHTML = "Cold";
+                guessesLeft--;
+            }
+            if (tempNum2 = 8) {
+                guessLogs.innerHTML = "Very Cold";
+                guessesLeft--;
+            }
+            if (Math.abs(playerGuess - randomNum) <= 5) {
+                guessesLeft++;
+            } 
+        }
+
+        if (guessesLeft > 0 && !computerLying) {
+        if (Math.abs(playerGuess - randomNum) <= 5) {
+            guessLogs.innerHTML = "Very Hot";
+        }   else if
+        (Math.abs(playerGuess - randomNum) <= 8) {
+            guessesLeft--;
+            guessLogs.innerHTML = "Hot";
+        }   else if
+        (Math.abs(playerGuess - randomNum) <= 15) {
+            guessesLeft--;
+            guessLogs.innerHTML = "Very Warm";
+        }   else if
+        (Math.abs(playerGuess - randomNum) <= 20) {
+            guessesLeft--;
+            guessLogs.innerHTML = "Warm";
+        }   else if
+        (Math.abs(playerGuess - randomNum) <= 30) {
+            guessesLeft--;
+            guessLogs.innerHTML = "Cool";
+        }   else if
+        (Math.abs(playerGuess - randomNum) <= 40) {
+            guessesLeft--;
+            guessLogs.innerHTML = "Very Cool";
+        }   else if
+        (Math.abs(playerGuess - randomNum) <= 55) {
+            guessesLeft--;
+            guessLogs.innerHTML = "Cold";
+        }   else   {
+            guessesLeft--;
+            guessLogs.innerHTML = "Very Cold";
+        }
+        checkAnswer();  
+    }
+        modifyGuess(0);
+        checkAnswer();
+        guessLogs.style.fontWeight = "bold";
+    }
+
+    function checkAnswer() {
+        if (playerGuess == randomNum) {
+            alert("YOU WIN! - THE NUMBER WAS " + randomNum + "! PRESS [RESET GAME] TO PLAY AGAIN!")
+        }   else if 
+        (guessesLeft == 0) {
+            alert("YOU LOSE - THE NUMBER WAS " + randomNum + "! PRESS [RESET GAME] TO PLAY AGAIN!");
+        }   else {}
+    }
+
+    function resetGame() {
+        guessLogs.innerHTML = "";
+        playerGuess = 50;
+        guessesLeft = 5;
+        generateNum();
+    }
+
+</script>
+</head>
+<body onload = "generateNum();">
+<h1 style = "color: purple;"> <strong> Number Guessing Game! </strong> </h1>
+<div id = "numDisplay"> </div>
+<div id = "currentGuess"> </div>
+<div id = "guessCounter"> </div>
+<div id = "guessAccuracy"> </div>
+<br>
+<div id = "guessLog"> </div>
+
+<button class = "button" id = "activeGame1" onclick = modifyGuess(1);> Add 1 </button>
+<button class = "button2" id = "activeGame2" onclick = modifyGuess(-1);> Subtract 1 </button>
+<button class = "button" id = "activeGame3" onclick = modifyGuess(5);> Add 5 </button>
+<button class = "button2" id = "activeGame4" onclick = modifyGuess(-5);> Subtract 5 </button>
+<button class = "button" id = "activeGame5" onclick = modifyGuess(10);> Add 10 </button>
+<button class = "button2" id = "activeGame6" onclick = modifyGuess(-10);> Subtract 10 </button>
+<button class = "button" id = "activeGame7" onclick = modifyGuess(25);> Add 25 </button>
+<button class = "button2" id = "activeGame8" onclick = modifyGuess(-25);> Subtract 25 </button>
+<br>
+<button class = "button3" id = "activeGame9" onclick = commitGuess();> <strong> Commit Guess </strong> </button>
+<br>
+<button class = "button3" onclick = resetGame();> <strong> Reset Game </strong> </button>
+<script src = "script.js"> </script>
+
+<style>
+.button {
+    background-color: #04AA6D;
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+  }
+
+  .button2 {
+    background-color: #e13913;
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+  }
+
+  .button3 {
+    background-color: #179bed;
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+  }
+
+</style>
+</body>
+</html>
